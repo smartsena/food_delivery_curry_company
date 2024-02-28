@@ -3,7 +3,7 @@
 # ------------------------
 import pandas as pd 
 import streamlit as st
-
+import utils
 from sidebar import FoodDeliverySidebar
 
 # ------------------------
@@ -19,8 +19,7 @@ st.set_page_config(
 # ------------------------
 # ---Open session--------------------
 # ------------------------
-df = st.session_state["df_data"]
-
+df = utils.DataFrameRaw.user_session_state()
 
 # ------------------------
 # ---Sidebar---------------------

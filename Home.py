@@ -36,8 +36,6 @@ st.set_page_config(
 if "df_data" not in st.session_state:  
     # ---Import---------------------
     df = utils.DataFrameRaw.import_dataset("data/train.csv")
-    # ---Feature Engiennier---------------------
-    df = utils.DataFrameRaw.clean_code(df)
     # ---Creat session---------------------
     st.session_state["df_data"] = df
 
@@ -48,7 +46,7 @@ df = st.session_state["df_data"]
 # ------------------------
 FoodDeliverySidebar.logo_sidebar()
 
-st.sidebar.markdown("https://github.com/smartsena/FIFA_football_dashboard/")
+st.sidebar.markdown("https://github.com/smartsena/food_delivery_curry_company")
 
 # ------------------------
 # ---Page---------------------

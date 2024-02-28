@@ -55,6 +55,7 @@ class FoodDeliverySidebar:
         # Filtro por 'Order_Date'
         df_filtered = (df['Order_Date'] > order_data_filter[0]) & (df['Order_Date'] < order_data_filter[1])
         df = df.loc[df_filtered, :]
+        
         # ---
         # Filtro por 'Road_traffic_density'
         df_filtered = df['Road_traffic_density'].isin(road_traffics)

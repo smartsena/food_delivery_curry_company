@@ -23,7 +23,7 @@ st.set_page_config(
 # ------------------------
 # ---Open session--------------------
 # ------------------------
-df = st.session_state["df_data"]
+df = utils.DataFrameRaw.user_session_state()
 
 
 # ------------------------
@@ -66,15 +66,15 @@ with st.container():
     )
     st.plotly_chart(df_fig)
 
-with st.container():
-    col1, col2 = st.columns(2)
-    with col1:
-        st.subheader("Visão Restaurante")
-    with col2:
-        st.subheader("Visão Restaurante")
+# with st.container():
+#     col1, col2 = st.columns(2)
+#     with col1:
+#         st.subheader("Visão Restaurante")
+#     with col2:
+#         st.subheader("Visão Restaurante")
 
 with st.container():
-    st.subheader("Visão Restaurante")
+    st.subheader("City by Time Taken(min) and Road Traffic Density")
     
     df_aux = df.loc[:,['City','Time_taken(min)','Road_traffic_density']].groupby(['City','Road_traffic_density']).agg({'Time_taken(min)': ['mean','std']})
     df_aux.columns = ['Time_taken_AVG','Time_taken_STD']
@@ -89,5 +89,17 @@ with st.container():
                          color_continuous_midpoint=np.average(df_aux['Time_taken_STD']))
     # Plotando gráfico
     st.plotly_chart(df_fig)
-    st.dataframe(df_aux)
+    # st.dataframe(df_aux)
+    st.dataframe(df_aux,column_config={
+        'Time_taken_AVG':st.column_config.ProgressColumn(
+            "Time Taken AVG (min)",
+            min_value=0,
+            max_value=df_aux['Time_taken_AVG'].max(),
+            format=" %.2f",),
+        'Time_taken_STD':st.column_config.ProgressColumn(
+            "Time Taken STD (min)",
+            min_value=0,
+            max_value=df_aux['Time_taken_STD'].max(),
+            format=" %.2f",),
+        })
 # ---  

@@ -3,16 +3,29 @@ import pandas as pd
 # import io 
 import os
 from haversine import haversine
-
+import streamlit as st
         
 class DataFrameRaw:
+    def user_session_state():
+        if "df_data" not in st.session_state:
+            df = DataFrameRaw.import_dataset("data/train.csv")
+        else:
+            df = st.session_state["df_data"]
+    
+        return df
+    
     def import_dataset(path_raw_file):
         """Load DataSet"""
+        print("\n\n\n\n\\n\n\n\n --------------------->>>>>>>>>>>>>>>>>>>>>")
+        print(path_raw_file)
         if os.path.isfile(path_raw_file):
             df_raw = pd.read_csv(path_raw_file)
         else:
             print('File ---{}--- not found'.format(path_raw_file))
-        return df_raw
+        
+        df = DataFrameRaw.clean_code(df_raw)
+        
+        return df
     
     def clean_code(df):
         """Feature Engiennier"""

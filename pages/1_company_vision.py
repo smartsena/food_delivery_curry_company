@@ -8,7 +8,7 @@ import folium
 import streamlit as st
 from streamlit_folium import folium_static
 from sidebar import FoodDeliverySidebar
-
+import utils
 
 # ------------------------
 # ---Page Config---------------------
@@ -23,8 +23,7 @@ st.set_page_config(
 # ------------------------
 # ---Open session--------------------
 # ------------------------
-df = st.session_state["df_data"]
-
+df = utils.DataFrameRaw.user_session_state()
 
 # ------------------------
 # ---Sidebar---------------------
@@ -41,16 +40,16 @@ st.subheader("Visão Empresa")
 tab1, tab2, tab3 = st.tabs(['Visão Gerencial', 'Visão Tática', 'Visão Geográfica'])
 
 with tab1:
-    with st.container():
-        col1, col2 = st.columns(2)
-        with col1:
-            st.subheader("Order by Day")
-            #Quantidade de entregas por cidade e por tipo de veículo
-            xpto = df.loc[:, ['ID', 'City', 'Type_of_vehicle']].groupby( ['City','Type_of_vehicle']).count().reset_index()
-            st.dataframe(xpto, width=400)
-        # with col2:
-        #     import numpy as np
-        #     st.bar_chart(np.random.randn(50, 3))
+    # with st.container():
+    #     col1, col2 = st.columns(2)
+    #     with col1:
+    #         st.subheader("Order by Day")
+    #         #Quantidade de entregas por cidade e por tipo de veículo
+    #         xpto = df.loc[:, ['ID', 'City', 'Type_of_vehicle']].groupby( ['City','Type_of_vehicle']).count().reset_index()
+    #         st.dataframe(xpto, width=400)
+    #     with col2:
+    #         import numpy as np
+    #         st.bar_chart(np.random.randn(50, 3))
     with st.container():
         # Agrupamento
         df_aux = df.loc[:,['ID', 'Order_Date']].groupby(['Order_Date']).count().reset_index()
@@ -116,7 +115,6 @@ with tab3:
     
     # # Médiana das lat e long --> valor central do conjunto de dados
     df_aux = df.loc[:, ['City', 'Road_traffic_density', 'Delivery_location_latitude', 'Delivery_location_longitude']].groupby(['City','Road_traffic_density']).median().reset_index()
-    print(df_aux)
     # # Instanciando objeto mapa com a biblioteca FOLIUM
     map_mundi = folium.Map()
 
