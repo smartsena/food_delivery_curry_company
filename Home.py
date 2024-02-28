@@ -18,6 +18,7 @@ import streamlit as st
 from streamlit_folium import folium_static
 # from haversine import haversine
 import utils
+from sidebar import FoodDeliverySidebar
 
 # ------------------------
 # ---Page Config---------------------
@@ -42,50 +43,24 @@ if "df_data" not in st.session_state:
 
 df = st.session_state["df_data"]
 
+# ------------------------
+# ---Sidebar---------------------
+# ------------------------
+FoodDeliverySidebar.logo_sidebar()
 
+st.sidebar.markdown("https://github.com/smartsena/FIFA_football_dashboard/")
 
-    
+# ------------------------
+# ---Page---------------------
+# ------------------------
 
+st.header('🍲 :rainbow[FOOD DELIVERY CURRY COMPANY]')
+
+st.link_button("Food Delivery Dataset","https://www.kaggle.com/datasets/gauravmalik26/food-delivery-dataset/")
+st.link_button("Portifólio de Projetos","https://smartsena.github.io/portifolio_projetos")
 
 st.markdown("""
 # FOOD DELIVERY CURRY COMPANY
 CONTEXT
-- This repository consists of analyzes and dashboards for the company's decision-making strategies.""")
-    
-    
-    
-# st.plotly_char(fig)
-
-# st.header(date_slider)
-
-
-# ------------------------
-# ------------------------
-# ------------------------
-# col1,col2 = st.columns(2)
-# col3,col4,col5 = st.columns(3)
-
-# fig_data = px.bar(df_filtered, x="dt_t_um", y="no_estagio", color="no_estagio", title="Data x Estágio")
-# col1.plotly_chart(fig_data)
-
-
-# fig_data2 = px.bar(df_filtered, x="dt_t_um", y="nu_area_ha", color="no_estagio", title="Data x Área total")
-# col2.plotly_chart(fig_data2)
-
-
-# stage_area = df_filtered.groupby("no_estagio")[["nu_area_ha"]].sum()
-# stage_ti = df_filtered.groupby("no_estagio")[["nu_area_ha"]].count()
-# st.sidebar.write(stage_area)
-# st.sidebar.write(stage_ti)
-
-# fig_data4 = px.bar(stage_area, title="Totais Área total x Estágio")
-# col4.plotly_chart(fig_data4)
-
-# # fig_data5 = px.pie(df_filtered, Values="stage", names="nu_area_ha", title="xpto")
-# fig_data5 = px.pie(stage_area, title="xpto")
-# col5.plotly_chart(fig_data5)
-
-# df_filtered
-# # btn_cmr2 = st.button("CMR-2")
-
-# df
+- This repository consists of analyzes and dashboards for the company's decision-making strategies.
+""")
