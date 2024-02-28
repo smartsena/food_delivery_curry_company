@@ -14,6 +14,7 @@ import streamlit as st
 from streamlit_folium import folium_static
 # from haversine import haversine
 import utils
+from sidebar import FoodDeliverySidebar
 
 
 # ------------------------
@@ -33,33 +34,9 @@ df = st.session_state["df_data"]
 
 
 # ------------------------
-# ---Barra Lateral---------------------
+# ---Sidebar---------------------
 # ------------------------
-
-# ---Input data 'min_order_date' end 'max_order_date'
-# from datetime import datetime
-min_order_date = df['Order_Date'].min().to_pydatetime()
-max_order_date = df['Order_Date'].max().to_pydatetime()
-order_data_filter = st.sidebar.slider(
-    'Filtro Data', 
-    min_value=min_order_date, 
-    max_value=max_order_date, 
-    value=[min_order_date, max_order_date]
-)
-# ---
-# ---Input data 'Road_traffic_density'
-road_traffic_values = df['Road_traffic_density'].value_counts().index
-road_traffics = st.sidebar.multiselect('Road_traffic_density', road_traffic_values, default=list(road_traffic_values))
-
-# ---
-# Filtro por 'Order_Date'
-df_filtered = (df['Order_Date'] > order_data_filter[0]) & (df['Order_Date'] < order_data_filter[1])
-df = df.loc[df_filtered, :]
-# ---
-# Filtro por 'Road_traffic_density'
-df_filtered = df['Road_traffic_density'].isin(road_traffics)
-df = df.loc[df_filtered, :]
-
+df = FoodDeliverySidebar.default_sidebar(df)
 
 # ------------------------
 # ---Layout Visão---------------------
