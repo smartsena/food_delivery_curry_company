@@ -73,7 +73,9 @@ class DeliverymanVision:
 
 class RestaurantVision:
     def festival_AVG_STD(df):
-        df_aux = df.loc[:,['Festival','Time_taken(min)']].groupby('Festival').agg({'Time_taken(min)': ['mean','std']})
+        df_aux = (df.loc[:,['Festival','Time_taken(min)']].
+                  groupby('Festival').
+                  agg({'Time_taken(min)': ['mean','std']}))
         df_aux.columns = ['Time_taken_AVG','Time_taken_STD']
         df_aux = df_aux.reset_index()
         

@@ -2,18 +2,11 @@
 # ---Imports---------------------
 # ------------------------
 import pandas as pd 
-import numpy as np
-import io 
-import os
-
-from PIL import Image
+# import numpy as np
 import plotly.express as px
-import plotly.graph_objects as go
 import folium
 import streamlit as st
 from streamlit_folium import folium_static
-# from haversine import haversine
-import utils
 from sidebar import FoodDeliverySidebar
 
 
