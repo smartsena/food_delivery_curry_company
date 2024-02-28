@@ -39,7 +39,7 @@ st.dataframe(df,column_config={
         min_value=0,
         max_value=df['Delivery_person_Ratings'].max(),
         format=" %f",),})
-st.write("...page under construction")
+st.write("\n\n\n 🚧 ...page under construction. 🚧")
 
 # ---
 # tab1, tab2, tab3 = st.tabs(['Visão Gerencial', '02', '03'])
